@@ -1,5 +1,4 @@
 import Image from "next/image"
-console.log("husky")
 
 export default function Home() {
   return (
