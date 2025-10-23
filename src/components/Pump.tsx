@@ -3,7 +3,7 @@ import { cn } from "../../lib/utils"
 import { Spotlight } from "../components/ui/Spotlight"
 import { RxCross2 } from "react-icons/rx"
 import React, { useReducer, useRef, useEffect, useState } from "react"
-import { gameReducer, GameState } from "../../lib/gameReducer"
+import { gameReducer } from "../../lib/gameReducer"
 import { priceGenerator } from "../../lib/priceSimulator"
 import PriceChart from "./PriceChart"
 import Timer from "./Timer"
@@ -85,13 +85,14 @@ export const Pump = () => {
 
       <div className="relative flex flex-col z-20 w-[90%] md:w-md h-[90vh]">
         <div className="flex items-center text-white gap-3 justify-end font-vazirmatn font-bold text-lg">
-          <p>بازی پامپ</p>
-          <div
+          <p id="game-title">بازی پامپ</p>
+          <button
+            aria-label="شروع دوباره بازی"
             onClick={() => dispatch({ type: "RESET_ROUND" })}
             className="w-6 h-6 flex justify-center items-center bg-red-500 rounded-[5px] cursor-pointer shadow-lg hover:shadow-inner active:translate-y-[1px] transition-all duration-150"
           >
             <RxCross2 />
-          </div>
+          </button>
         </div>
 
         <PrizeBar
@@ -105,7 +106,11 @@ export const Pump = () => {
         />
 
         <div className="flex flex-col justify-between mt-10 p-4 space-y-4">
-          <div className="flex items-center justify-center">
+          <div
+            role="img"
+            aria-label="نمودار قیمت"
+            className="flex items-center justify-center"
+          >
             <PriceChart
               prices={priceHistory}
               priceAtGuess={
@@ -117,12 +122,14 @@ export const Pump = () => {
             />
           </div>
 
-          <Timer
-            guess={state.guess}
-            phase={state.phase}
-            timeLeft={state.timeLeft}
-            data-testid="timer"
-          />
+          <div role="timer" aria-live="polite">
+            <Timer
+              guess={state.guess}
+              phase={state.phase}
+              timeLeft={state.timeLeft}
+              data-testid="timer"
+            />
+          </div>
 
           <GameControls
             currentPrice={state.currentPrice}
@@ -137,7 +144,9 @@ export const Pump = () => {
           />
 
           {state.phase === "showing_result" && (
-            <ResultBanner dispatch={dispatch} result={state.result!} />
+            <div role="status" aria-live="polite">
+              <ResultBanner dispatch={dispatch} result={state.result!} />
+            </div>
           )}
         </div>
       </div>

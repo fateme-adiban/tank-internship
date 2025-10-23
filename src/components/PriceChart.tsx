@@ -27,8 +27,26 @@ const PriceChart: React.FC<{
   const guessPrice = priceAtGuess?.toFixed(2)
 
   return (
-    <div data-testid={testId} className="w-full h-48 bg-transparent">
-      <ResponsiveContainer width="100%" height="100%">
+    <div
+      role="img"
+      aria-label="نمودار زنده قیمت اتریوم"
+      data-testid={testId}
+      className="w-full h-48 bg-transparent"
+    >
+      <figcaption className="sr-only">
+        این نمودار تغییرات قیمت اتریوم را در هر ثانیه نشان می‌دهد. خط آبی قیمت
+        فعلی و خط زرد قیمت حدس‌زده‌شده را نمایش می‌دهد
+      </figcaption>
+
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {`نمودار زنده قیمت اتریوم. ${
+          latestPrice
+            ? `آخرین قیمت ${latestPrice.toFixed(2)} دلار است.`
+            : "در حال بارگذاری..."
+        } ${guessPrice ? `قیمت حدس‌زده‌شده ${guessPrice} دلار است.` : ""}`}
+      </div>
+
+      <ResponsiveContainer aria-hidden="true" width="100%" height="100%">
         <AreaChart
           data={chartData}
           margin={{ top: 10, right: 20, bottom: 10, left: 0 }}

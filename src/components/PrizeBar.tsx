@@ -38,10 +38,18 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
   const shouldActivate = hasGuessed || streak > 0
 
   return (
-    <div data-testid={testId} className="relative w-full flex flex-col mt-10">
+    <div
+      role="progressbar"
+      aria-valuemin={1}
+      aria-valuemax={steps.length}
+      aria-valuenow={currentIndex + 1}
+      data-testid={testId}
+      className="relative w-full flex flex-col mt-10"
+    >
       <span data-testid="prize-value" className="sr-only">
         {steps[currentIndex]}
       </span>
+
       <div className="absolute left-1/2 -top-3 transform -translate-x-1/2 px-2 py-1 bg-[#193851] text-zinc-300 text-xs rounded-sm shadow font-vazirmatn">
         مرحله {currentIndex + 1} از {steps.length}
       </div>
@@ -70,14 +78,22 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
               >
                 <div className="flex flex-col justify-center items-center">
                   {isCompleted && (
-                    <Check className="text-green-500 font-bold text-lg mb-1" />
+                    <Check
+                      role="img"
+                      aria-label="برد"
+                      className="text-green-500 font-bold text-lg mb-1"
+                    />
                   )}
 
                   {isCurrent &&
                     streak === 0 &&
                     lastAttemptIndex === currentIndex &&
                     phase === "showing_result" && (
-                      <ImCross className="text-red-500 font-bold text-lg mb-1" />
+                      <ImCross
+                        role="img"
+                        aria-label="باخت"
+                        className="text-red-500 font-bold text-lg mb-1"
+                      />
                     )}
 
                   {isCurrent && phase !== "showing_result" && (
@@ -91,6 +107,7 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
                         ease: "easeInOut",
                       }}
                       className="absolute top-1/2 transform -translate-y-6 text-orange-500"
+                      aria-hidden="true"
                     >
                       <ArrowDown size={20} />
                     </motion.div>
@@ -103,7 +120,7 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
                   </span>
                 </div>
 
-                <div className="text-white text-[20px]">
+                <div className="text-white text-[20px]" aria-hidden="true">
                   <IoIosArrowForward />
                 </div>
               </div>

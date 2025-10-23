@@ -12,18 +12,24 @@ export default function Timer({
   guess?: "up" | "down"
   "data-testid"?: string
 }) {
+  const phaseLabel =
+    phase === "guessing"
+      ? "تا پایان زمان تصمیم‌گیری"
+      : phase === "watching"
+        ? "تا مشخص شدن پیش‌بینی"
+        : "تا شروع بازی"
+
   return (
     <div
       data-testid={testId}
       className="flex flex-col justify-center items-center mt-15 font-bold gap-2 font-vazirmatn"
     >
-      <div className="text-white text-[16px] justify-center items-center flex gap-2 mb-2">
-        <span>
-          {phase === "guessing" && "تا پایان زمان تصمیم‌گیری"}
-          {phase === "watching" && "تا مشخص شدن پیش‌بینی"}
-          {phase === "showing_result" && "تا شروع بازی"}
-        </span>
-
+      <div
+        role="timer"
+        aria-live="polite"
+        className="text-white text-[16px] justify-center items-center flex gap-2 mb-2"
+      >
+        <span>{phaseLabel}</span>
         <span
           className={cn(
             "text-2xl",
@@ -34,24 +40,26 @@ export default function Timer({
         </span>
       </div>
 
-      {phase === "watching" &&
-        (guess === "up" ? (
-          <div className="text-white text-sm sm:text-lg">
-            <span>پیش‌بینی شما </span>
-            <span className="text-green-500">بالا </span>
-            <span>رفتن قیمت اتریومه</span>
-          </div>
-        ) : guess === "down" ? (
-          <div className="text-white text-sm sm:text-lg">
-            <span>پیش‌بینی شما </span>
-            <span className="text-red-500">پایین </span>
-            <span>رفتن قیمت اتریومه</span>
-          </div>
-        ) : null)}
+      {phase === "watching" && guess && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="text-white text-sm sm:text-lg"
+        >
+          <span>پیش‌بینی شما </span>
+          <span className={guess === "up" ? "text-green-500" : "text-red-500"}>
+            {guess === "up" ? "بالا" : "پایین"}
+          </span>
+          <span> رفتن قیمت اتریومه</span>
+        </div>
+      )}
 
       {phase === "guessing" && (
-        <div className="flex justify-center items-center text-gray-400 text-[10px] sm:text-xs gap-1.5">
-          <span>.تو این مرحله، قیمت ۱۵ ثانیه آینده رو پیش‌بینی کن</span>
+        <div
+          role="note"
+          className="flex justify-center items-center text-gray-400 text-[10px] sm:text-xs gap-1.5"
+        >
+          <span>تو این مرحله، قیمت ۱۵ ثانیه آینده رو پیش‌بینی کن</span>
           <RiErrorWarningLine />
         </div>
       )}
