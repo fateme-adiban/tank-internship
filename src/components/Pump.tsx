@@ -10,7 +10,6 @@ import Timer from "./Timer"
 import GameControls from "./GameControls"
 import ResultBanner from "./ResultBanner"
 import PrizeBar from "./PrizeBar"
-import { stat } from "fs"
 
 export const Pump = () => {
   const [state, dispatch] = useReducer(gameReducer, {
@@ -22,6 +21,8 @@ export const Pump = () => {
     currentPrize: 0,
     timeLeft: 30,
     guesses: [],
+    hasGuessed: false,
+    lastAttemptIndex: -1,
   })
 
   const [priceHistory, setPriceHistory] = useState<number[]>([
@@ -45,18 +46,21 @@ export const Pump = () => {
   }, [])
 
   useEffect(() => {
+    if (state.phase === "guessing" && state.timeLeft === 0) {
+      dispatch({ type: "SHOW_RESULT" })
+    }
+
     if (state.phase === "watching" && state.timeLeft <= 0) {
       dispatch({ type: "SHOW_RESULT" })
     }
 
-    if (state.phase === "showing_result") {
+    if (state.phase === "showing_result" && state.result === "win") {
       const timeout = setTimeout(() => {
         dispatch({ type: "RESET_ROUND" })
       }, 3000)
-
       return () => clearTimeout(timeout)
     }
-  }, [state.phase, state.timeLeft])
+  }, [state.phase, state.timeLeft, state.result, dispatch])
 
   const handleGuess = (guess: "up" | "down") => {
     if (state.phase !== "guessing") return
@@ -83,7 +87,7 @@ export const Pump = () => {
         <div className="flex items-center text-white gap-3 justify-end font-vazirmatn font-bold text-lg">
           <p>بازی پامپ</p>
           <div
-            onClick={() => window.location.reload()}
+            onClick={() => dispatch({ type: "RESET_ROUND" })}
             className="w-6 h-6 flex justify-center items-center bg-red-500 rounded-[5px] cursor-pointer shadow-lg hover:shadow-inner active:translate-y-[1px] transition-all duration-150"
           >
             <RxCross2 />
@@ -91,13 +95,16 @@ export const Pump = () => {
         </div>
 
         <PrizeBar
+          phase={state.phase}
           streak={state.streak}
-          currentPrize={state.currentPrize}
           basePrize={state.basePrize}
-          maxMultiplier={5}
+          maxMultiplier={36}
+          hasGuessed={!!state.guess}
+          lastAttemptIndex={state.guesses.length - 1}
+          data-testid="prize-bar"
         />
 
-        <div className="flex flex-col justify-between mt-20 p-4 space-y-4">
+        <div className="flex flex-col justify-between mt-10 p-4 space-y-4">
           <div className="flex items-center justify-center">
             <PriceChart
               prices={priceHistory}
@@ -106,6 +113,7 @@ export const Pump = () => {
                   ? state.guesses[state.guesses.length - 1]?.price
                   : undefined
               }
+              data-testid="price-chart"
             />
           </div>
 
@@ -113,6 +121,7 @@ export const Pump = () => {
             guess={state.guess}
             phase={state.phase}
             timeLeft={state.timeLeft}
+            data-testid="timer"
           />
 
           <GameControls
@@ -123,7 +132,7 @@ export const Pump = () => {
                 : undefined
             }
             phase={state.phase}
-            disabled={state.phase !== "guessing"}
+            disabled={state.phase === "guessing" && state.timeLeft <= 0}
             onGuess={handleGuess}
           />
 

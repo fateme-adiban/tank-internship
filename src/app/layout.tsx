@@ -1,11 +1,12 @@
 import type { Metadata } from "next"
-import { Lalezar } from "next/font/google"
+import { Vazirmatn } from "next/font/google"
 import "./globals.css"
 
-const lalezar = Lalezar({
-  variable: "--font-lalezar",
-  subsets: ["latin"],
-  weight: "400",
+const vazirmatn = Vazirmatn({
+  variable: "--font-vazirmatn",
+  subsets: ["latin", "arabic"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -20,20 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-
-      <body className={`${lalezar.variable} antialiased`}>{children}</body>
+      <body className={`${vazirmatn.variable} antialiased`}>{children}</body>
     </html>
   )
 }

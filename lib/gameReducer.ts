@@ -19,6 +19,8 @@ export interface GameState {
   currentPrize: number
   timeLeft: number
   guesses: GuessRecord[]
+  hasGuessed: boolean
+  lastAttemptIndex: number
 }
 
 export type GameAction =
@@ -59,7 +61,8 @@ export const gameReducer = (
         if (state.phase === "watching") {
           return gameReducer(state, { type: "SHOW_RESULT" })
         }
-        if (state.phase === "showing_result") {
+
+        if (state.phase === "showing_result" && state.result === "win") {
           return {
             ...state,
             phase: "guessing",
@@ -68,31 +71,39 @@ export const gameReducer = (
             result: undefined,
           }
         }
+
+        if (state.phase === "showing_result" && state.result === "lose") {
+          return { ...state, timeLeft: 0 }
+        }
       }
+
       return { ...state, timeLeft: state.timeLeft - 1 }
 
-    case "SHOW_RESULT":
+    case "SHOW_RESULT": {
       if (!state.guess) return state
 
       const startPrice = state.startPrice
-
       const endPrice = state.currentPrice
 
-      const realDirection = endPrice > startPrice ? "up" : "down"
+      const realDirection: Guess = endPrice > startPrice ? "up" : "down"
       const didWin = realDirection === state.guess
+
+      const newStreak = didWin ? state.streak + 1 : 0
+      const newPrize = didWin
+        ? state.streak > 0
+          ? state.currentPrize * 2
+          : state.basePrize
+        : 0
 
       return {
         ...state,
         result: didWin ? "win" : "lose",
-        streak: didWin ? state.streak + 1 : 0,
-        currentPrize: didWin
-          ? state.streak > 0
-            ? state.currentPrize * 2
-            : state.basePrize
-          : 0,
+        streak: newStreak,
+        currentPrize: newPrize,
         phase: "showing_result",
         timeLeft: 3,
       }
+    }
 
     case "RESET_ROUND":
       return {
@@ -101,6 +112,10 @@ export const gameReducer = (
         guess: undefined,
         result: undefined,
         timeLeft: 30,
+        currentPrize: 0,
+        streak: 0,
+        lastAttemptIndex: -1,
+        hasGuessed: false,
       }
 
     default:

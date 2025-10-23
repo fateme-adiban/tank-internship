@@ -5,13 +5,18 @@ export default function Timer({
   phase,
   timeLeft,
   guess,
+  "data-testid": testId,
 }: {
   phase: string
   timeLeft: number
   guess?: "up" | "down"
+  "data-testid"?: string
 }) {
   return (
-    <div className="flex flex-col justify-center items-center mt-15 font-bold gap-2 font-vazirmatn">
+    <div
+      data-testid={testId}
+      className="flex flex-col justify-center items-center mt-15 font-bold gap-2 font-vazirmatn"
+    >
       <div className="text-white text-[16px] justify-center items-center flex gap-2 mb-2">
         <span>
           {phase === "guessing" && "تا پایان زمان تصمیم‌گیری"}

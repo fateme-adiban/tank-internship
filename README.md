@@ -1,55 +1,47 @@
-# 🗂️ Next.js + TypeScript Starter
-
-A ready to use Next.js (App Router) project with:
-
-- **TypeScript**
-- **ESLint**
-- **Prettier**
-- **Jest**
-- **React Testing Library**
-- **Playwright**
-- **Husky**
-- **lint-staged**
-- **GitHub Actions**
-
----
-
-## 💡 Getting Started
-
-### 1️⃣ Install dependencies
+## ⚡ Local Setup
 
 ```bash
+
 npm install
-```
 
-### 2️⃣ Run development server
-
-```bash
 npm run dev
 ```
 
----
-
-## 🧪 Testing
+## 🧪 Tests
 
 ```bash
-npm run test
+npm test
+
+npx playwright test
 ```
 
-## 🧹 Linting
+## 🛠️ Project Structure
 
 ```bash
-npm run lint
-```
+src
+    /app
+        /components
 
-## 🔧 Build
+            Pump.tsx          # Main game page (Client Component)
+            PriceChart.tsx    # Live chart (Recharts)
+            Timer.tsx         # Countdown timer
+            PrizeBar.tsx
+            GameControls.tsx
+            ResultBanner.tsx
 
-```bash
-npm run build
-```
+lib
 
-## 🧾 Commit message format
+    gameReducer.ts        # Game and prize logic reducer
+    priceSimulator.ts     # Simulated price generation algorithm
 
-```bash
-<type>: <short description>
+
+__tests__
+
+    GameReducer.test.ts
+    priceGenerator.test.ts
+    Pump.test.tsx
+
+e2e
+
+    pump.spec.ts
 ```

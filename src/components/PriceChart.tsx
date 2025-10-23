@@ -6,23 +6,31 @@ import {
   ReferenceLine,
 } from "recharts"
 
-const PriceChart: React.FC<{ prices: number[]; priceAtGuess?: number }> = ({
-  prices,
-  priceAtGuess,
-}) => {
+const PriceChart: React.FC<{
+  prices: number[]
+  priceAtGuess?: number
+  "data-testid"?: string
+}> = ({ prices, priceAtGuess, "data-testid": testId }) => {
   const data = prices.map((p, i) => ({
     time: i,
     price: p,
   }))
 
+  const placeholderData = Array.from({ length: 10 }, (_, i) => ({
+    time: i,
+    price: 1800,
+  }))
+
+  const chartData = data.length ? data : placeholderData
+
   const latestPrice = prices[prices.length - 1]
   const guessPrice = priceAtGuess?.toFixed(2)
 
   return (
-    <div className="w-full h-48 bg-transparent">
+    <div data-testid={testId} className="w-full h-48 bg-transparent">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
-          data={data}
+          data={chartData}
           margin={{ top: 10, right: 20, bottom: 10, left: 0 }}
         >
           <defs>
