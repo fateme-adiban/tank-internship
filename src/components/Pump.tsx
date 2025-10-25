@@ -31,19 +31,38 @@ export const Pump = () => {
 
   const priceGenRef = useRef<Generator<number>>(priceGenerator(42))
 
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
   useEffect(() => {
-    const interval = setInterval(() => {
+    // پاک کردن قبلی
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
+
+    if (state.phase !== "guessing" && state.phase !== "watching") {
+      return
+    }
+
+    if (state.timeLeft <= 0) {
+      return
+    }
+
+    intervalRef.current = setInterval(() => {
       const next = priceGenRef.current.next()
       const newPrice = next.value ?? 1800
 
       setPriceHistory((prev) => [...prev.slice(-59), newPrice])
-
       dispatch({ type: "SET_PRICE", price: newPrice })
       dispatch({ type: "TICK" })
     }, 1000)
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [state.phase, state.timeLeft])
 
   useEffect(() => {
     if (state.phase === "guessing" && state.timeLeft === 0) {
@@ -101,7 +120,9 @@ export const Pump = () => {
           basePrize={state.basePrize}
           maxMultiplier={36}
           hasGuessed={!!state.guess}
-          lastAttemptIndex={state.guesses.length - 1}
+          lastAttemptIndex={
+            state.guesses.length > 0 ? state.guesses.length - 1 : -1
+          }
           data-testid="prize-bar"
         />
 

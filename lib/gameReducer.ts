@@ -54,6 +54,8 @@ export const gameReducer = (
         startPrice: action.priceAtGuess,
         guesses: [...state.guesses, newGuess],
         timeLeft: 15,
+        currentPrize: 0,
+        streak: 0,
       }
 
     case "TICK":
@@ -62,25 +64,32 @@ export const gameReducer = (
           return gameReducer(state, { type: "SHOW_RESULT" })
         }
 
-        if (state.phase === "showing_result" && state.result === "win") {
-          return {
-            ...state,
-            phase: "guessing",
-            timeLeft: 30,
-            guess: undefined,
-            result: undefined,
+        if (state.phase === "showing_result") {
+          if (state.result === "win") {
+            return {
+              ...state,
+              phase: "guessing",
+              timeLeft: 30,
+              guess: undefined,
+              result: undefined,
+              hasGuessed: false,
+            }
           }
-        }
 
-        if (state.phase === "showing_result" && state.result === "lose") {
-          return { ...state, timeLeft: 0 }
+          if (state.result === "lose") {
+            return gameReducer(state, { type: "RESET_ROUND" })
+          }
         }
       }
 
-      return { ...state, timeLeft: state.timeLeft - 1 }
+      if (state.timeLeft > 0) {
+        return { ...state, timeLeft: state.timeLeft - 1 }
+      }
+
+      return state
 
     case "SHOW_RESULT": {
-      if (!state.guess) return state
+      if (state.phase !== "watching" || !state.guess) return state
 
       const startPrice = state.startPrice
       const endPrice = state.currentPrice
@@ -88,7 +97,6 @@ export const gameReducer = (
       const realDirection: Guess = endPrice > startPrice ? "up" : "down"
       const didWin = realDirection === state.guess
 
-      const newStreak = didWin ? state.streak + 1 : 0
       const newPrize = didWin
         ? state.streak > 0
           ? state.currentPrize * 2
@@ -98,7 +106,7 @@ export const gameReducer = (
       return {
         ...state,
         result: didWin ? "win" : "lose",
-        streak: newStreak,
+        streak: didWin ? state.streak + 1 : 0,
         currentPrize: newPrize,
         phase: "showing_result",
         timeLeft: 3,
@@ -116,6 +124,8 @@ export const gameReducer = (
         streak: 0,
         lastAttemptIndex: -1,
         hasGuessed: false,
+        basePrize: state.basePrize,
+        guesses: [], // پاک کردن تاریخچه حدس‌ها
       }
 
     default:

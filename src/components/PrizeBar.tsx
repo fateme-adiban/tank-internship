@@ -34,7 +34,10 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
     return Number(value.toFixed(6))
   })
 
-  const currentIndex = hasGuessed ? lastAttemptIndex : streak
+  const currentIndex = hasGuessed
+    ? (lastAttemptIndex ?? -1)
+    : Math.min(streak, steps.length - 1)
+
   const shouldActivate = hasGuessed || streak > 0
 
   return (
