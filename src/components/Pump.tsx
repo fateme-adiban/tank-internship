@@ -1,4 +1,5 @@
 "use client"
+import { onCLS, onLCP, onFCP, onTTFB } from "web-vitals"
 import { cn } from "../../lib/utils"
 import { Spotlight } from "../components/ui/Spotlight"
 import { RxCross2 } from "react-icons/rx"
@@ -10,6 +11,13 @@ import Timer from "./Timer"
 import GameControls from "./GameControls"
 import ResultBanner from "./ResultBanner"
 import PrizeBar from "./PrizeBar"
+
+function reportWebVitals() {
+  onCLS(console.log)
+  onLCP(console.log)
+  onFCP(console.log)
+  onTTFB(console.log)
+}
 
 export const Pump = () => {
   const [state, dispatch] = useReducer(gameReducer, {
@@ -31,38 +39,20 @@ export const Pump = () => {
 
   const priceGenRef = useRef<Generator<number>>(priceGenerator(42))
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
-
   useEffect(() => {
-    // پاک کردن قبلی
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
-
-    if (state.phase !== "guessing" && state.phase !== "watching") {
-      return
-    }
-
-    if (state.timeLeft <= 0) {
-      return
-    }
-
-    intervalRef.current = setInterval(() => {
+    const interval = setInterval(() => {
       const next = priceGenRef.current.next()
       const newPrice = next.value ?? 1800
 
       setPriceHistory((prev) => [...prev.slice(-59), newPrice])
+
       dispatch({ type: "SET_PRICE", price: newPrice })
       dispatch({ type: "TICK" })
     }, 1000)
 
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-        intervalRef.current = null
-      }
-    }
-  }, [state.phase, state.timeLeft])
+    reportWebVitals()
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (state.phase === "guessing" && state.timeLeft === 0) {
@@ -120,9 +110,7 @@ export const Pump = () => {
           basePrize={state.basePrize}
           maxMultiplier={36}
           hasGuessed={!!state.guess}
-          lastAttemptIndex={
-            state.guesses.length > 0 ? state.guesses.length - 1 : -1
-          }
+          lastAttemptIndex={state.guesses.length - 1}
           data-testid="prize-bar"
         />
 
@@ -149,6 +137,7 @@ export const Pump = () => {
               phase={state.phase}
               timeLeft={state.timeLeft}
               data-testid="timer"
+              aria-label="زمان باقی‌مانده در بازی پامپ"
             />
           </div>
 

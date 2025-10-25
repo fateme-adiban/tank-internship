@@ -54,8 +54,6 @@ export const gameReducer = (
         startPrice: action.priceAtGuess,
         guesses: [...state.guesses, newGuess],
         timeLeft: 15,
-        currentPrize: 0,
-        streak: 0,
       }
 
     case "TICK":
@@ -73,6 +71,8 @@ export const gameReducer = (
               guess: undefined,
               result: undefined,
               hasGuessed: false,
+              basePrize: state.basePrize + state.currentPrize, // اضافه کردن جایزه فعلی به basePrize
+              currentPrize: 0, // ریست کردن جایزه فعلی
             }
           }
 
@@ -124,8 +124,8 @@ export const gameReducer = (
         streak: 0,
         lastAttemptIndex: -1,
         hasGuessed: false,
-        basePrize: state.basePrize,
-        guesses: [], // پاک کردن تاریخچه حدس‌ها
+        basePrize: 0.005,
+        guesses: [],
       }
 
     default:

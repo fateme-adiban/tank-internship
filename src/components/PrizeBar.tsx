@@ -43,6 +43,7 @@ const PrizeBar: React.FC<PrizeBarProps> = ({
   return (
     <div
       role="progressbar"
+      aria-label="پیشرفت جایزه در بازی پامپ، مرحله فعلی از کل مراحل"
       aria-valuemin={1}
       aria-valuemax={steps.length}
       aria-valuenow={currentIndex + 1}
