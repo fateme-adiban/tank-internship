@@ -71,14 +71,12 @@ export const gameReducer = (
               guess: undefined,
               result: undefined,
               hasGuessed: false,
-              basePrize: state.basePrize + state.currentPrize, // اضافه کردن جایزه فعلی به basePrize
-              currentPrize: 0, // ریست کردن جایزه فعلی
+              basePrize: state.basePrize + state.currentPrize,
+              currentPrize: 0,
             }
           }
 
-          if (state.result === "lose") {
-            return gameReducer(state, { type: "RESET_ROUND" })
-          }
+          return state
         }
       }
 
