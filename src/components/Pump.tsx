@@ -12,12 +12,12 @@ import GameControls from "./GameControls"
 import ResultBanner from "./ResultBanner"
 import PrizeBar from "./PrizeBar"
 
-function reportWebVitals() {
-  onCLS(console.log)
-  onLCP(console.log)
-  onFCP(console.log)
-  onTTFB(console.log)
-}
+// function reportWebVitals() {
+//   onCLS(console.log)
+//   onLCP(console.log)
+//   onFCP(console.log)
+//   onTTFB(console.log)
+// }
 
 export const Pump = () => {
   const [state, dispatch] = useReducer(gameReducer, {
@@ -50,7 +50,7 @@ export const Pump = () => {
       dispatch({ type: "TICK" })
     }, 1000)
 
-    reportWebVitals()
+    // reportWebVitals()
     return () => clearInterval(interval)
   }, [])
 
