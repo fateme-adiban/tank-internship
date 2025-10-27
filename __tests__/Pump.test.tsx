@@ -21,7 +21,9 @@ jest.mock("recharts", () => {
   const OriginalRecharts = jest.requireActual("recharts")
   return {
     ...OriginalRecharts,
-    ResponsiveContainer: ({ children }: any) => <div>{children}</div>,
+    ResponsiveContainer: ({ children }: React.PropsWithChildren) => (
+      <div>{children}</div>
+    ),
   }
 })
 
@@ -61,7 +63,7 @@ describe("Pump integration test", () => {
     const timer = screen.getByTestId("timer")
     const prize = screen.getByTestId("prize-value")
 
-    expect(timer.textContent).toBe("تا شروع بازی۰۰: ۳")
+    expect(timer).toHaveTextContent("تا شروع بازی۰۰: ۳")
 
     expect(parseFloat(prize.textContent || "0")).toBeCloseTo(0.005)
   })
@@ -75,7 +77,7 @@ describe("Pump integration test", () => {
     act(() => jest.advanceTimersByTime(3000))
 
     const timer = screen.getByTestId("timer")
-    expect(timer.textContent).toContain("۰۰: ۳۰")
+    expect(timer).toHaveTextContent("۰۰: ۳۰")
   })
 
   it("handles timer running out without guess", () => {
@@ -83,7 +85,7 @@ describe("Pump integration test", () => {
     act(() => jest.advanceTimersByTime(30000))
     const timer = screen.getByTestId("timer")
 
-    expect(timer.textContent).toContain("۰۰: ۰")
+    expect(timer).toHaveTextContent("۰۰: ۰")
   })
 
   it("does not carry over prize between rounds", () => {
@@ -111,7 +113,7 @@ describe("Pump integration test", () => {
     act(() => jest.advanceTimersByTime(3000))
 
     const prize = screen.getByTestId("prize-value")
-    expect(parseFloat(prize.textContent || "0")).toBeCloseTo(0.005)
+    expect(prize).toHaveTextContent("0.005")
   })
 
   // it("doubles prize on consecutive correct guesses", () => {
