@@ -1,7 +1,6 @@
 "use client"
 import { StudentAttendanceByGroupChartData } from "../../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
-import { CustomTooltip } from "@/components/CustomTooltip"
 import {
   BarChart,
   Bar,
@@ -11,7 +10,51 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
-import { blue } from "@ant-design/colors"
+import { blue, gray } from "@ant-design/colors"
+
+const CustomTooltip = ({
+  active,
+  payload
+}: {
+  active?: boolean
+  payload?: Array<{
+    value: number
+    dataKey: string
+    payload: { name: string; value: number }
+  }>
+}) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload
+
+    return (
+      <div
+        dir="rtl"
+        style={{
+          background: "#fff",
+          border: "1px solid #f5f5f5",
+          borderRadius: 4,
+          padding: "8px 18px",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          fontSize: 13,
+          lineHeight: 1.5,
+          position: "relative",
+          textAlign: "right"
+        }}
+      >
+        <div
+          style={{
+            color: gray.primary,
+            marginBottom: 4
+          }}
+        >
+          {data.name}
+        </div>
+        <div>مقدار: {`${ToPersian(data.value)}٪`}</div>
+      </div>
+    )
+  }
+  return null
+}
 
 export const StudentAttendanceByGroupChart = () => (
   <div

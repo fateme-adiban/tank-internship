@@ -24,9 +24,6 @@ const CustomTooltip = ({
   }>
 }) => {
   if (active && payload && payload.length) {
-    const teacher = payload.find((p) => p.dataKey === "teacher")?.value || 0
-    const value = payload.find((p) => p.dataKey === "value")?.value || 0
-
     const data = payload[0].payload
 
     return (
