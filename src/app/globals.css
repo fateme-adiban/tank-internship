@@ -6,10 +6,38 @@
 
 html,
 body {
-  @apply p-0 m-0 box-border;
+  @apply p-0 m-0 box-border font-semibold;
 }
 
 @theme inline {
-  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
   --font-vazirmatn: "Vazirmatn", sans-serif;
+}
+
+.no-hover-btn,
+.no-hover-btn:hover,
+.no-hover-btn:focus,
+.no-hover-btn:active {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-color: #eeeded !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.my-select-dropdown .ant-select-item {
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+}
+
+.my-select-dropdown .ant-select-dropdown-menu {
+  direction: rtl !important;
+}
+
+.my-select-dropdown
+  ~ .ant-select
+  .ant-select-selector
+  .ant-select-selection-item,
+.ant-select .ant-select-selector .ant-select-selection-item {
+  color: black !important;
+  font-weight: 600 !important;
 }
