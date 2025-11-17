@@ -18,10 +18,19 @@ export const Tabs = () => {
           }
           block
           size="large"
-          style={{ padding: "25px 0px" }}
+          style={{ padding: "25px 0px", lineHeight: "1.7" }}
           className="no-hover-btn"
         >
-          <span className="font-semibold text-[15px]"> مدیریت نوبت‌ها</span>
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+            className="font-semibold text-[15px]"
+          >
+            مدیریت نوبت‌ها
+          </span>
         </Button>
       </Col>
 
@@ -31,7 +40,7 @@ export const Tabs = () => {
           icon={<UserOutlined style={{ color: blue.primary, fontSize: 15 }} />}
           block
           size="large"
-          style={{ padding: "25px 0px" }}
+          style={{ padding: "25px 0px", lineHeight: "1.7" }}
           className="no-hover-btn"
         >
           <span className="font-semibold text-[15px]">لیست دانش‌آموزها</span>
@@ -44,10 +53,17 @@ export const Tabs = () => {
           icon={<BookOutlined style={{ color: blue.primary, fontSize: 15 }} />}
           block
           size="large"
-          style={{ padding: "25px 0px" }}
+          style={{ padding: "25px 5px", lineHeight: "1.7" }}
           className="no-hover-btn"
         >
-          <span className="font-semibold text-[15px]">
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+            className="font-semibold text-[15px]"
+          >
             تعریف درس‌ها و واحدها
           </span>
         </Button>
@@ -61,10 +77,19 @@ export const Tabs = () => {
           }
           block
           size="large"
-          style={{ padding: "25px 0px" }}
+          style={{ padding: "25px 0px", lineHeight: "1.7" }}
           className="no-hover-btn"
         >
-          <span className="font-semibold text-[15px]">لیست گزارش‌ها</span>
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap"
+            }}
+            className="font-semibold text-[15px]"
+          >
+            لیست گزارش‌ها
+          </span>
         </Button>
       </Col>
     </Row>

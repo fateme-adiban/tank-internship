@@ -14,14 +14,7 @@ import {
 import { useRouter, usePathname } from "next/navigation"
 import { useMemo } from "react"
 
-interface MenuItem {
-  key: string
-  icon: React.ReactNode
-  label: string
-  children?: { key: string; label: string }[]
-}
-
-const menuItems: MenuItem[] = [
+const menuItems = [
   { key: "/dashboard", icon: <DashboardOutlined />, label: "داشبورد" },
   { key: "/classes", icon: <BookOutlined />, label: "کلاس‌ها" },
   { key: "/calendar", icon: <CalendarOutlined />, label: "تقویم" },
@@ -62,45 +55,40 @@ export const SidebarMenu: React.FC = () => {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Hooks FIRST — unconditional
   const selectedKey = useMemo(() => {
     if (!pathname || pathname === "/" || pathname === "/dashboard")
       return "/dashboard"
-
     const allItems = menuItems.flatMap((item) =>
       item.children ? [item, ...item.children] : [item]
     )
-
     const match = allItems.find((item) => pathname.startsWith(item.key))
     return match ? match.key : "/dashboard"
   }, [pathname])
 
   const openKeys = useMemo(() => {
     if (!pathname) return []
-
     const parent = menuItems.find((item) =>
       item.children?.some((child) => pathname.startsWith(child.key))
     )
     return parent ? [parent.key] : []
   }, [pathname])
 
-  // Early return AFTER hooks
-  if (!pathname) return null
+  if (!pathname) {
+    return null
+  }
 
-  const buildMenuItems = (items: typeof menuItems) =>
-    items.map((item) => ({
+  const buildMenuItems = () =>
+    menuItems.map((item) => ({
       key: item.key,
       icon: item.icon,
       label: item.label,
       onClick: !item.children ? () => router.push(item.key) : undefined,
-      children: item.children
-        ? item.children.map((child) => ({
-            key: child.key,
-            label: child.label,
-            onClick: () => router.push(child.key),
-            style: { paddingRight: 40 }
-          }))
-        : undefined
+      children: item.children?.map((child) => ({
+        key: child.key,
+        label: child.label,
+        onClick: () => router.push(child.key),
+        style: { paddingRight: 40 }
+      }))
     }))
 
   return (
@@ -109,7 +97,7 @@ export const SidebarMenu: React.FC = () => {
       theme="light"
       selectedKeys={[selectedKey]}
       defaultOpenKeys={openKeys}
-      items={buildMenuItems(menuItems)}
+      items={buildMenuItems()}
       style={{
         marginRight: "10px",
         fontSize: "13px",
