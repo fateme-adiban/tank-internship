@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Row, Col, Card, ConfigProvider, Select } from "antd"
 import { gray } from "@ant-design/colors"
+import { useMediaQuery } from "react-responsive"
 import { sectionOptions } from "../../utils/data"
 import { Tabs } from "./Tabs"
 import { TopTeachers } from "./TopTeachers"
@@ -13,6 +14,8 @@ import { StudentAttendanceChart } from "./StudentAttendanceChart"
 import { StudentAttendanceByGroupChart } from "./StudentAttendanceByGroupChart"
 
 export const Dashboard = () => {
+  const isMobile = useMediaQuery({ maxWidth: 1024 })
+
   const [selected, setSelected] = useState("main")
 
   return (
@@ -42,6 +45,9 @@ export const Dashboard = () => {
               <div className="flex justify-between items-center">
                 <span
                   style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                     color: gray[5],
                     fontSize: 15
                   }}
@@ -58,7 +64,7 @@ export const Dashboard = () => {
                         دانشکده اصلی
                       </span>
                     }
-                    style={{ width: "30%" }}
+                    style={{ width: isMobile ? "50%" : "30%" }}
                     options={sectionOptions}
                     defaultValue="main"
                     classNames={{
@@ -83,6 +89,9 @@ export const Dashboard = () => {
               <div className="flex justify-between items-center">
                 <span
                   style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                     fontSize: 14
                   }}
                 >
@@ -101,6 +110,9 @@ export const Dashboard = () => {
               <div className="flex justify-between items-center">
                 <span
                   style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                     fontSize: 14
                   }}
                 >

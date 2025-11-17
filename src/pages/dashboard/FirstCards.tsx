@@ -270,7 +270,7 @@ export const FirstCards = () => {
             </span>
             <img
               src="/images/cuate.png"
-              className="w-40 md:w-30 2xl:w-35 absolute bottom-0 -left-1"
+              className="w-35 md:w-30 2xl:w-35 absolute bottom-0 -left-1"
             />
           </div>
         </Card>

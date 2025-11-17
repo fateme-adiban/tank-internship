@@ -3,6 +3,7 @@ import { StudentAttendanceChartData } from "../../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import { ToPersianDate } from "@/utils/ToPersianDate"
 import { blue, orange } from "@ant-design/colors"
+import { useMediaQuery } from "react-responsive"
 import {
   AreaChart,
   Area,
@@ -145,78 +146,84 @@ const CustomTooltip = ({
   )
 }
 
-export const StudentAttendanceChart = () => (
-  <div
-    style={{
-      width: "100%",
-      height: 280,
-      direction: "rtl",
-      textAlign: "center"
-    }}
-  >
-    <div style={{ height: 250, margin: "10px 0", transition: "all 0.2s ease" }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <AreaChart
-          data={StudentAttendanceChartData as ChartDataPoint[]}
-          margin={{ top: 0, right: 0, left: 20, bottom: 30 }}
-        >
-          <CartesianGrid vertical={false} strokeOpacity={0.4} />
-          <XAxis
-            dataKey="day"
-            tick={{ fontSize: 13, fontWeight: 600 }}
-            interval={0}
-            dy={10}
-            axisLine={false}
-            tickLine={false}
-          />
-          <YAxis
-            orientation="right"
-            tick={{ fontSize: 14, fontWeight: 600 }}
-            dx={20}
-            tickFormatter={(value: number) => ToPersian(value)}
-            axisLine={false}
-            tickLine={false}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Area
-            name="کلاس‌های قبل ۱۲"
-            type="linear"
-            dataKey="before_12"
-            stroke={orange.primary}
-            strokeWidth={1}
-            fill="none"
-            dot={{
-              fill: orange.primary,
-              r: 2
-            }}
-            isAnimationActive={false}
-          />
-          <Area
-            name="کلاس‌های بعد ۱۲"
-            type="linear"
-            dataKey="after_12"
-            stroke={blue.primary}
-            strokeWidth={1}
-            fill="none"
-            dot={{
-              fill: blue.primary,
-              r: 2
-            }}
-            isAnimationActive={false}
-          />
-          <Legend
-            verticalAlign="bottom"
-            align="center"
-            iconType="square"
-            wrapperStyle={{
-              direction: "rtl",
-              fontSize: 13,
-              marginBottom: -30
-            }}
-            content={<CustomLegend />}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+export const StudentAttendanceChart = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 })
+
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: 280,
+        direction: "rtl",
+        textAlign: "center"
+      }}
+    >
+      <div
+        style={{ height: 250, margin: "10px 0", transition: "all 0.2s ease" }}
+      >
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={StudentAttendanceChartData as ChartDataPoint[]}
+            margin={{ top: 0, right: 0, left: 20, bottom: 30 }}
+          >
+            <CartesianGrid vertical={false} strokeOpacity={0.4} />
+            <XAxis
+              dataKey="day"
+              tick={{ fontSize: 13, fontWeight: 600 }}
+              interval={isMobile ? 1 : 0}
+              dy={10}
+              axisLine={false}
+              tickLine={false}
+            />
+            <YAxis
+              orientation="right"
+              tick={{ fontSize: 14, fontWeight: 600 }}
+              dx={20}
+              tickFormatter={(value: number) => ToPersian(value)}
+              axisLine={false}
+              tickLine={false}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Area
+              name="کلاس‌های قبل ۱۲"
+              type="linear"
+              dataKey="before_12"
+              stroke={orange.primary}
+              strokeWidth={1}
+              fill="none"
+              dot={{
+                fill: orange.primary,
+                r: 2
+              }}
+              isAnimationActive={false}
+            />
+            <Area
+              name="کلاس‌های بعد ۱۲"
+              type="linear"
+              dataKey="after_12"
+              stroke={blue.primary}
+              strokeWidth={1}
+              fill="none"
+              dot={{
+                fill: blue.primary,
+                r: 2
+              }}
+              isAnimationActive={false}
+            />
+            <Legend
+              verticalAlign="bottom"
+              align="center"
+              iconType="square"
+              wrapperStyle={{
+                direction: "rtl",
+                fontSize: 13,
+                marginBottom: -30
+              }}
+              content={<CustomLegend />}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
     </div>
-  </div>
-)
+  )
+}
