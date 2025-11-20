@@ -167,7 +167,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
                 display: "flex",
                 alignItems: "center",
                 gap: 10,
-                paddingRight: 12
+                paddingRight: 0
               }}
             >
               <Image src="/images/logo.svg" alt="لوگو" width={30} height={35} />
