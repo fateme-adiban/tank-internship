@@ -53,8 +53,8 @@ const HeaderSectionSkeleton = () => (
 
       <Divider style={{ margin: "10px 0", borderColor: "#e7e7e7" }} />
 
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-6">
+      <div className="flex justify-between items-center gap-5">
+        <div className="flex items-center gap-6 overflow-x-auto">
           {[1, 2, 3, 4].map((i) => (
             <div key={i} className="flex items-center gap-2">
               <Skeleton
@@ -82,7 +82,7 @@ const HeaderSectionSkeleton = () => (
           />
           <Skeleton
             active
-            title={{ width: 96 }}
+            title={{ width: 30 }}
             paragraph={{ rows: 0 }}
             style={{ margin: 0 }}
           />
