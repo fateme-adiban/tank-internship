@@ -60,13 +60,7 @@ export const AttendanceChartSkeleton = () => (
   </div>
 )
 
-export const AttendanceChart: React.FC<{ loading?: boolean }> = ({
-  loading = false
-}) => {
-  if (loading) {
-    return <AttendanceChartSkeleton />
-  }
-
+export const AttendanceChart = () => {
   return (
     <div
       style={{
@@ -76,7 +70,7 @@ export const AttendanceChart: React.FC<{ loading?: boolean }> = ({
         textAlign: "center"
       }}
     >
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="100%" minHeight={280}>
         <BarChart
           data={DataBarChart}
           margin={{ top: 20, right: 0, left: 0, bottom: 30 }}

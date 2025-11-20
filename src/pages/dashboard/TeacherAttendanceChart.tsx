@@ -105,7 +105,7 @@ export const TeacherAttendanceChart = () => (
       textAlign: "center"
     }}
   >
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" minHeight={400}>
       <BarChart
         data={TeacherAttendanceChartData}
         margin={{ top: 25, right: 0, left: 0, bottom: 60 }}

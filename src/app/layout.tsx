@@ -2,13 +2,13 @@ import type { Metadata } from "next"
 import { Vazirmatn } from "next/font/google"
 import { ConfigProvider } from "antd"
 import { timezTheme } from "../styles/theme"
-import "antd/dist/reset.css"
+import { HydrationFix } from "@/components/HydrationFix"
 import "./globals.css"
 
 const vazirmatn = Vazirmatn({
   variable: "--font-vazirmatn",
   subsets: ["latin", "arabic"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap"
 })
 
@@ -23,9 +23,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className={`${vazirmatn.variable} antialiased`}>
-        <ConfigProvider theme={timezTheme}>{children}</ConfigProvider>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <body
+        className={`${vazirmatn.variable} antialiased`}
+        suppressHydrationWarning
+      >
+        <ConfigProvider theme={timezTheme}>
+          <HydrationFix />
+          {children}
+        </ConfigProvider>
       </body>
     </html>
   )
