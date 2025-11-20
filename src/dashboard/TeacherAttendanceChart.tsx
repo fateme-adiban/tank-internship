@@ -11,7 +11,6 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
-import { Skeleton } from "antd"
 
 const CustomTooltip = ({
   active,

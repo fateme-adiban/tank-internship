@@ -108,7 +108,9 @@ export const Dashboard = () => {
         <Col xs={24}>
           <Card
             title={
-              <div className="flex justify-between items-center">
+              <div
+                className={`flex justify-between items-center ${isMobile ? "gap-10" : "gap-0"}`}
+              >
                 <span
                   style={{
                     overflow: "hidden",
