@@ -1,7 +1,7 @@
 "use client"
 import { List, Avatar, Skeleton } from "antd"
 import { blue, grey } from "@ant-design/colors"
-import { Teachers } from "../../utils/data"
+import { Teachers } from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 
 const TopTeachersSkeleton = () => (

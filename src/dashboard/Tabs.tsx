@@ -1,5 +1,5 @@
 "use client"
-import { Row, Col, Button, Skeleton } from "antd"
+import { Row, Col, Button } from "antd"
 import { blue } from "@ant-design/colors"
 import {
   CalendarOutlined,

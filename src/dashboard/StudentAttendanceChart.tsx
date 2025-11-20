@@ -1,5 +1,5 @@
 "use client"
-import { StudentAttendanceChartData } from "../../utils/data"
+import { StudentAttendanceChartData } from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import { ToPersianDate } from "@/utils/ToPersianDate"
 import { blue, orange } from "@ant-design/colors"

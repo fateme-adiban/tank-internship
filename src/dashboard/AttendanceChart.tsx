@@ -1,5 +1,5 @@
 "use client"
-import { DataBarChart } from "../../utils/data"
+import { DataBarChart } from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import { CustomTooltip } from "@/components/CustomTooltip"
 import {

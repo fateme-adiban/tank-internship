@@ -1,6 +1,6 @@
 "use client"
 import { blue, gray } from "@ant-design/colors"
-import { TeacherAttendanceChartData } from "../../utils/data"
+import { TeacherAttendanceChartData } from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import {
   BarChart,

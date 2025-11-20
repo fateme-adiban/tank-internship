@@ -4,7 +4,7 @@ import {
   StudentsWithHighestAttendance,
   SessionsHeldCount,
   CanceledSessionsCount
-} from "../../utils/data"
+} from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import { blue, grey } from "@ant-design/colors"
 

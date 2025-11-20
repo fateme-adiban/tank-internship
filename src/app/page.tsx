@@ -1,6 +1,6 @@
 "use client"
 import { AdminLayout } from "@/components/AdminLayout"
-import { Dashboard } from "@/pages/dashboard"
+import { Dashboard } from "../dashboard"
 import { Loading } from "@/components/Loading"
 import { useEffect, useState } from "react"
 

@@ -1,5 +1,5 @@
 import { Row, Col, Card, Progress, Divider, Skeleton } from "antd"
-import { DataCardChart } from "../../utils/data"
+import { DataCardChart } from "../utils/data"
 import { ToPersianDate } from "@/utils/ToPersianDate"
 import { ToPersian } from "@/utils/ToPersian"
 import { blue, gray, green } from "@ant-design/colors"
@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
   Tooltip
 } from "recharts"
+import Image from "next/image"
 
 const CustomTooltip = ({
   active,
@@ -298,7 +299,10 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
             <span style={{ color: gray[2], fontSize: 13, fontWeight: 500 }}>
               با بیشترین کلاس حضور غیاب شده
             </span>
-            <img
+            <Image
+              width={140}
+              height={35}
+              alt="جام"
               src="/images/cuate.png"
               className="w-35 md:w-30 2xl:w-35 absolute bottom-0 -left-1"
             />

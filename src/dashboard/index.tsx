@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
 import { Row, Col, Card, ConfigProvider, Select } from "antd"
 import { gray } from "@ant-design/colors"
-import { sectionOptions } from "../../utils/data"
+import { sectionOptions } from "../utils/data"
 
 import { Tabs } from "./Tabs"
 import { TopTeachers } from "./TopTeachers"

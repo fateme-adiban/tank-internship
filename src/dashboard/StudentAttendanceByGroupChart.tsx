@@ -1,5 +1,5 @@
 "use client"
-import { StudentAttendanceByGroupChartData } from "../../utils/data"
+import { StudentAttendanceByGroupChartData } from "../utils/data"
 import { ToPersian } from "@/utils/ToPersian"
 import {
   BarChart,
@@ -11,7 +11,6 @@ import {
   ResponsiveContainer
 } from "recharts"
 import { blue, gray } from "@ant-design/colors"
-import { Skeleton } from "antd"
 
 const CustomTooltip = ({
   active,

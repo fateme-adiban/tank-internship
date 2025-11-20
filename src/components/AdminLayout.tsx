@@ -9,6 +9,7 @@ import { HeaderSection } from "./HeaderSection"
 import { ContentSection } from "./ContentSection"
 import { MenuOutlined } from "@ant-design/icons"
 import { useMediaQuery } from "react-responsive"
+import Image from "next/image"
 
 const { Sider } = Layout
 
@@ -169,7 +170,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
                 paddingRight: 12
               }}
             >
-              <img src="/images/logo.svg" alt="لوگو" style={{ height: 35 }} />
+              <Image src="/images/logo.svg" alt="لوگو" width={30} height={35} />
               <span
                 style={{ fontSize: 18, fontWeight: 600, color: blue.primary }}
               >
@@ -216,7 +217,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           }}
           onClick={toggle}
         >
-          <img src="/images/logo.svg" alt="logo" />
+          <Image src="/images/logo.svg" alt="logo" width={30} height={35} />
           {!collapsed && (
             <span
               className="text-2xl transition-opacity duration-300"
