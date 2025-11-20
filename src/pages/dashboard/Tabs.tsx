@@ -1,4 +1,5 @@
-import { Row, Col, Button } from "antd"
+"use client"
+import { Row, Col, Button, Skeleton } from "antd"
 import { blue } from "@ant-design/colors"
 import {
   CalendarOutlined,
@@ -7,7 +8,51 @@ import {
   BookOutlined
 } from "@ant-design/icons"
 
-export const Tabs = () => {
+const TabsSkeleton = () => (
+  <Row gutter={[16, 16]} justify="space-between">
+    {[1, 2, 3, 4].map((i) => (
+      <Col key={i} xs={24} sm={12} md={6}>
+        <div
+          style={{
+            padding: "15px 10px",
+            background: "#fff",
+            border: "1px solid #f0f0f0",
+            borderRadius: 12,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 14
+          }}
+        >
+          <div
+            style={{
+              width: 20,
+              height: 20,
+              background: "#e6f7ff",
+              borderRadius: 10,
+              flexShrink: 0
+            }}
+          />
+
+          <div
+            style={{
+              height: 20,
+              width: 110,
+              background: "#f0f0f0",
+              borderRadius: 6
+            }}
+          />
+        </div>
+      </Col>
+    ))}
+  </Row>
+)
+
+export const Tabs: React.FC<{ loading?: boolean }> = ({ loading = false }) => {
+  if (loading) {
+    return <TabsSkeleton />
+  }
+
   return (
     <Row gutter={[16, 16]} justify="space-between">
       <Col xs={24} sm={12} md={6}>
@@ -22,12 +67,12 @@ export const Tabs = () => {
           className="no-hover-btn"
         >
           <span
+            className="font-semibold text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}
-            className="font-semibold text-[15px]"
           >
             مدیریت نوبت‌ها
           </span>
@@ -57,12 +102,12 @@ export const Tabs = () => {
           className="no-hover-btn"
         >
           <span
+            className="font-semibold text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}
-            className="font-semibold text-[15px]"
           >
             تعریف درس‌ها و واحدها
           </span>
@@ -81,12 +126,12 @@ export const Tabs = () => {
           className="no-hover-btn"
         >
           <span
+            className="font-semibold text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap"
             }}
-            className="font-semibold text-[15px]"
           >
             لیست گزارش‌ها
           </span>

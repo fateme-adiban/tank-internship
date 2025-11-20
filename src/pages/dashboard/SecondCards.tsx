@@ -1,4 +1,4 @@
-import { Row, Col, Card, List, Avatar } from "antd"
+import { Row, Col, Card, List, Avatar, Skeleton } from "antd"
 import {
   StudentsWithMostAbsences,
   StudentsWithHighestAttendance,
@@ -8,7 +8,94 @@ import {
 import { ToPersian } from "@/utils/ToPersian"
 import { blue, grey } from "@ant-design/colors"
 
-export const SecondCards = () => {
+const SecondCardsSkeleton = () => (
+  <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+    {[1, 2, 3, 4].map((card) => (
+      <Col key={card} xs={24} md={12} xl={6}>
+        <Card
+          style={{ height: 260 }}
+          styles={{ body: { paddingTop: 0 } }}
+          title={
+            <Skeleton.Input
+              active
+              style={{ width: 180, height: 22, borderRadius: 6 }}
+            />
+          }
+        >
+          <div
+            style={{
+              direction: "rtl",
+              padding: "10px 3px",
+              height: 260,
+              overflow: "hidden"
+            }}
+          >
+            {[1, 2, 3, 4].map((i) => {
+              return (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "8px 0",
+                    borderBottom: "1px solid rgba(0,0,0,0.04)"
+                  }}
+                >
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: 10 }}
+                  >
+                    <div
+                      style={{
+                        width: 25,
+                        height: 25,
+                        borderRadius: "50%",
+                        background: "#e6f7ff",
+                        position: "relative",
+                        overflow: "hidden"
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: "-100%",
+                          width: "100%",
+                          height: "100%",
+                          background:
+                            "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)",
+                          animation: "shine 2.5s infinite",
+                          animationDelay: `${i * 0.15}s`
+                        }}
+                      />
+                    </div>
+
+                    <Skeleton.Input
+                      active
+                      style={{
+                        width: 50,
+                        height: 18,
+                        borderRadius: 6
+                      }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Card>
+      </Col>
+    ))}
+  </Row>
+)
+
+export const SecondCards: React.FC<{ loading?: boolean }> = ({
+  loading = false
+}) => {
+  if (loading) {
+    return <SecondCardsSkeleton />
+  }
+
   return (
     <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
       <Col xs={24} md={12} xl={6}>

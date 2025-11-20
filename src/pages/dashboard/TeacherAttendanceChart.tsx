@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
+import { Skeleton } from "antd"
 
 const CustomTooltip = ({
   active,
@@ -55,6 +56,45 @@ const CustomTooltip = ({
   }
   return null
 }
+
+export const TeacherAttendanceChartSkeleton = () => (
+  <div
+    style={{
+      width: "100%",
+      height: 400,
+      direction: "rtl",
+      background: "#fafafa",
+      borderRadius: 12,
+      padding: "20px 16px",
+      position: "relative",
+      overflow: "hidden"
+    }}
+  >
+    <div
+      style={{
+        position: "absolute",
+        top: 40,
+        left: 60,
+        right: 40,
+        bottom: 100
+      }}
+    >
+      {[0, 25, 50, 75, 100].map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: `${i * 25}%`,
+            height: 1,
+            background: "rgba(0,0,0,0.05)"
+          }}
+        />
+      ))}
+    </div>
+  </div>
+)
 
 export const TeacherAttendanceChart = () => (
   <div

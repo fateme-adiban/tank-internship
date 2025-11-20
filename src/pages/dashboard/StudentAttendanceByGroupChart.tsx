@@ -11,6 +11,7 @@ import {
   ResponsiveContainer
 } from "recharts"
 import { blue, gray } from "@ant-design/colors"
+import { Skeleton } from "antd"
 
 const CustomTooltip = ({
   active,
@@ -56,47 +57,91 @@ const CustomTooltip = ({
   return null
 }
 
-export const StudentAttendanceByGroupChart = () => (
+export const StudentAttendanceByGroupChartSkeleton = () => (
   <div
     style={{
       width: "100%",
       height: 280,
       direction: "rtl",
-      textAlign: "center"
+      background: "#fafafa",
+      borderRadius: 12,
+      padding: "20px 16px",
+      position: "relative",
+      overflow: "hidden"
     }}
   >
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart
-        data={StudentAttendanceByGroupChartData}
-        margin={{ top: 20, right: 0, left: 40, bottom: 50 }}
-      >
-        <CartesianGrid vertical={false} strokeOpacity={0.4} />
-
-        <XAxis
-          dataKey="name"
-          tick={{ fontSize: 12, fontWeight: 500 }}
-          interval={0}
-          angle={-270}
-          dx={-5}
-          dy={35}
-          axisLine={false}
-          tickLine={false}
+    <div
+      style={{
+        position: "absolute",
+        top: 40,
+        left: 60,
+        right: 60,
+        bottom: 80
+      }}
+    >
+      {[0, 25, 50, 75, 100].map((_, i) => (
+        <div
+          key={i}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            top: `${i * 25}%`,
+            height: 1,
+            background: "rgba(0,0,0,0.05)"
+          }}
         />
-
-        <YAxis
-          orientation="right"
-          tick={{ fontSize: 14, fontWeight: 600 }}
-          dx={30}
-          ticks={[0, 25, 50, 75, 100]}
-          tickFormatter={(value) => `${ToPersian(value)}٪`}
-          axisLine={false}
-          tickLine={false}
-        />
-
-        <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
-
-        <Bar dataKey="value" fill={blue.primary} barSize={20} />
-      </BarChart>
-    </ResponsiveContainer>
+      ))}
+    </div>
   </div>
 )
+
+export const StudentAttendanceByGroupChart = () => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: 280,
+        direction: "rtl",
+        textAlign: "center"
+      }}
+    >
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          data={StudentAttendanceByGroupChartData}
+          margin={{ top: 20, right: 0, left: 40, bottom: 50 }}
+        >
+          <CartesianGrid vertical={false} strokeOpacity={0.4} />
+
+          <XAxis
+            dataKey="name"
+            tick={{ fontSize: 12, fontWeight: 500 }}
+            interval={0}
+            angle={-270}
+            dx={-5}
+            dy={35}
+            axisLine={false}
+            tickLine={false}
+          />
+
+          <YAxis
+            orientation="right"
+            tick={{ fontSize: 14, fontWeight: 600 }}
+            dx={30}
+            ticks={[0, 25, 50, 75, 100]}
+            tickFormatter={(value) => `${ToPersian(value)}٪`}
+            axisLine={false}
+            tickLine={false}
+          />
+
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ fill: "transparent" }}
+          />
+
+          <Bar dataKey="value" fill={blue.primary} barSize={20} />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}

@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Layout, Drawer, Avatar, Button, Divider } from "antd"
 import { gray } from "@ant-design/colors"
 import { SettingOutlined } from "@ant-design/icons"
@@ -19,15 +19,24 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
 
   const [collapsed, setCollapsed] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [isLoadingData, setIsLoadingData] = useState(true)
 
   const toggle = () => setCollapsed(!collapsed)
   const openDrawer = () => setDrawerOpen(true)
   const closeDrawer = () => setDrawerOpen(false)
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoadingData(false)
+    }, 1000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   if (isMobile) {
     return (
       <Layout style={{ minHeight: "100vh", direction: "rtl" }}>
-        <HeaderSection>
+        <HeaderSection loading={isLoadingData}>
           <div className="flex justify-between items-center mb-1">
             <div className="flex gap-3 items-center">
               <div
@@ -170,7 +179,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           }
         >
           <div style={{ paddingTop: 16 }}>
-            <SidebarMenu />
+            <SidebarMenu loading={isLoadingData} />
           </div>
         </Drawer>
       </Layout>
@@ -218,7 +227,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           )}
         </div>
 
-        <SidebarMenu />
+        <SidebarMenu loading={isLoadingData} />
       </Sider>
 
       <Layout
@@ -227,7 +236,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           transition: "margin-right 0.2s ease"
         }}
       >
-        <HeaderSection />
+        <HeaderSection loading={isLoadingData} />
         <ContentSection>{children}</ContentSection>
       </Layout>
     </Layout>

@@ -14,6 +14,7 @@ import {
   CartesianGrid,
   Legend
 } from "recharts"
+import { Skeleton } from "antd"
 
 interface ChartDataPoint {
   date: string
@@ -146,7 +147,35 @@ const CustomTooltip = ({
   )
 }
 
-export const StudentAttendanceChart = () => {
+export const StudentAttendanceChartSkeleton = () => (
+  <div
+    style={{
+      width: "100%",
+      height: 280,
+      direction: "rtl",
+      background: "#fafafa",
+      borderRadius: 12,
+      padding: "16px",
+      position: "relative",
+      overflow: "hidden"
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        padding: "0 20px",
+        marginTop: 230
+      }}
+    >
+      {[0, 1, 2].map((day) => (
+        <Skeleton.Input key={day} active style={{ width: 24, height: 16 }} />
+      ))}
+    </div>
+  </div>
+)
+
+export const StudentAttendanceChart = ({}) => {
   const isMobile = useMediaQuery({ maxWidth: 768 })
 
   return (

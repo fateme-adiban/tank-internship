@@ -1,5 +1,7 @@
 "use client"
-import { Menu } from "antd"
+import { useRouter, usePathname } from "next/navigation"
+import { useMemo } from "react"
+import { Menu, Skeleton } from "antd"
 import { gray } from "@ant-design/colors"
 import {
   DashboardOutlined,
@@ -11,8 +13,6 @@ import {
   FileTextOutlined,
   PieChartOutlined
 } from "@ant-design/icons"
-import { useRouter, usePathname } from "next/navigation"
-import { useMemo } from "react"
 
 const menuItems = [
   { key: "/dashboard", icon: <DashboardOutlined />, label: "داشبورد" },
@@ -51,7 +51,29 @@ const menuItems = [
   { key: "/reports", icon: <PieChartOutlined />, label: "گزارش" }
 ]
 
-export const SidebarMenu: React.FC = () => {
+const SidebarSkeleton = () => (
+  <div style={{ padding: "16px 10px" }}>
+    {Array(8)
+      .fill(null)
+      .map((_, i) => (
+        <div
+          key={i}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 3,
+            padding: "5px"
+          }}
+        >
+          <Skeleton active title={{ width: 120 }} paragraph={{ rows: 0 }} />
+        </div>
+      ))}
+  </div>
+)
+
+export const SidebarMenu: React.FC<{ loading?: boolean }> = ({
+  loading = false
+}) => {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -90,6 +112,8 @@ export const SidebarMenu: React.FC = () => {
         style: { paddingRight: 40 }
       }))
     }))
+
+  if (loading) return <SidebarSkeleton />
 
   return (
     <Menu

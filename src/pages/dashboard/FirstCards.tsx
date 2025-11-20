@@ -1,4 +1,4 @@
-import { Row, Col, Card, Progress, Divider } from "antd"
+import { Row, Col, Card, Progress, Divider, Skeleton } from "antd"
 import { DataCardChart } from "../../utils/data"
 import { ToPersianDate } from "@/utils/ToPersianDate"
 import { ToPersian } from "@/utils/ToPersian"
@@ -70,7 +70,37 @@ const CustomTooltip = ({
   return null
 }
 
-export const FirstCards = () => {
+export const FirstCardsSkeleton = () => (
+  <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+    {[1, 2, 3, 4].map((i) => (
+      <Col key={i} xs={24} md={12} xl={6}>
+        <Card
+          style={{ height: 200 }}
+          styles={{
+            header: { borderBottom: "none" },
+            body: { paddingTop: 0 }
+          }}
+          title={<Skeleton.Input active style={{ width: 100, height: 16 }} />}
+        >
+          <div style={{ padding: "16px 0px" }}>
+            <div className="flex flex-col items-center gap-3">
+              <Skeleton.Input active style={{ width: 80, height: 16 }} />
+              <Skeleton.Input active style={{ width: 140, height: 16 }} />
+            </div>
+          </div>
+        </Card>
+      </Col>
+    ))}
+  </Row>
+)
+
+export const FirstCards: React.FC<{ loading?: boolean }> = ({
+  loading = false
+}) => {
+  if (loading) {
+    return <FirstCardsSkeleton />
+  }
+
   return (
     <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
       <Col xs={24} md={12} xl={6}>
