@@ -71,9 +71,10 @@ const SidebarSkeleton = () => (
   </div>
 )
 
-export const SidebarMenu: React.FC<{ loading?: boolean }> = ({
-  loading = false
-}) => {
+export const SidebarMenu: React.FC<{
+  loading?: boolean
+  collapsed?: boolean
+}> = ({ loading = false, collapsed = false }) => {
   const router = useRouter()
   const pathname = usePathname()
 
@@ -109,7 +110,7 @@ export const SidebarMenu: React.FC<{ loading?: boolean }> = ({
         key: child.key,
         label: child.label,
         onClick: () => router.push(child.key),
-        style: { paddingRight: 40 }
+        style: { paddingRight: 24 }
       }))
     }))
 
@@ -119,14 +120,15 @@ export const SidebarMenu: React.FC<{ loading?: boolean }> = ({
     <Menu
       mode="inline"
       theme="light"
+      inlineCollapsed={collapsed}
       selectedKeys={[selectedKey]}
       defaultOpenKeys={openKeys}
       items={buildMenuItems()}
       style={{
-        marginRight: "10px",
         fontSize: "13px",
         color: gray[7],
-        borderInlineEnd: "none"
+        borderInlineEnd: "none",
+        marginRight: 0
       }}
     />
   )

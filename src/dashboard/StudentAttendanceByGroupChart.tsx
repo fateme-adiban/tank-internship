@@ -114,18 +114,19 @@ export const StudentAttendanceByGroupChart = () => {
 
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 12, fontWeight: 500 }}
+            tick={{ fontSize: 12 }}
+            angle={-90}
+            textAnchor="start"
             interval={0}
-            angle={-270}
-            dx={-5}
-            dy={35}
+            dx={-8}
+            dy={5}
             axisLine={false}
             tickLine={false}
           />
 
           <YAxis
             orientation="right"
-            tick={{ fontSize: 14, fontWeight: 600 }}
+            tick={{ fontSize: 14 }}
             dx={30}
             ticks={[0, 25, 50, 75, 100]}
             tickFormatter={(value) => `${ToPersian(value)}٪`}

@@ -78,18 +78,20 @@ export const AttendanceChart = () => {
           <CartesianGrid vertical={false} strokeOpacity={0.4} />
           <XAxis
             dataKey="day"
-            tick={{ fontSize: 12, fontWeight: 500 }}
+            tick={{ fontSize: 12 }}
             interval={0}
             angle={-90}
             dx={-5}
-            dy={20}
+            textAnchor="start"
+            dy={5}
             axisLine={false}
             tickLine={false}
           />
           <YAxis
             orientation="right"
-            tick={{ fontSize: 14, fontWeight: 600 }}
-            dx={20}
+            tick={{ fontSize: 14 }}
+            dy={-3}
+            dx={25}
             ticks={[0, 0.25, 0.5, 0.75, 1]}
             tickFormatter={(value) => ToPersian(value)}
             axisLine={false}

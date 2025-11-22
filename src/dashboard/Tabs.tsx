@@ -67,7 +67,7 @@ export const Tabs: React.FC<{ loading?: boolean }> = ({ loading = false }) => {
           className="no-hover-btn"
         >
           <span
-            className="font-semibold text-[15px]"
+            className="text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -88,7 +88,7 @@ export const Tabs: React.FC<{ loading?: boolean }> = ({ loading = false }) => {
           style={{ padding: "25px 0px", lineHeight: "1.7" }}
           className="no-hover-btn"
         >
-          <span className="font-semibold text-[15px]">لیست دانش‌آموزها</span>
+          <span className="text-[15px]">لیست دانش‌آموزها</span>
         </Button>
       </Col>
 
@@ -102,7 +102,7 @@ export const Tabs: React.FC<{ loading?: boolean }> = ({ loading = false }) => {
           className="no-hover-btn"
         >
           <span
-            className="font-semibold text-[15px]"
+            className="text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",
@@ -126,7 +126,7 @@ export const Tabs: React.FC<{ loading?: boolean }> = ({ loading = false }) => {
           className="no-hover-btn"
         >
           <span
-            className="font-semibold text-[15px]"
+            className="text-[15px]"
             style={{
               overflow: "hidden",
               textOverflow: "ellipsis",

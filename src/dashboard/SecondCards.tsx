@@ -110,7 +110,7 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
             <span
               style={{
                 fontSize: 15,
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -146,14 +146,14 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
                       style={{
                         backgroundColor: isTop3 ? blue.primary : "transparent",
                         color: isTop3 ? "#fff" : blue.primary,
-                        fontWeight: "bold",
+
                         width: 25,
                         height: 25
                       }}
                     >
                       {ToPersian(student.rank)}
                     </Avatar>
-                    <span style={{ fontWeight: 600 }}>{student.name}</span>
+                    <span>{student.name}</span>
                   </div>
 
                   <div style={{ color: grey[1] }}>
@@ -178,7 +178,7 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
             <span
               style={{
                 fontSize: 15,
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -214,14 +214,13 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
                       style={{
                         backgroundColor: isTop3 ? blue.primary : "transparent",
                         color: isTop3 ? "#fff" : blue.primary,
-                        fontWeight: "bold",
                         width: 25,
                         height: 25
                       }}
                     >
                       {ToPersian(student.rank)}
                     </Avatar>
-                    <span style={{ fontWeight: 600 }}>{student.name}</span>
+                    <span>{student.name}</span>
                   </div>
 
                   <div style={{ color: grey[1] }}>
@@ -246,7 +245,7 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
             <span
               style={{
                 fontSize: 15,
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -282,14 +281,13 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
                       style={{
                         backgroundColor: isTop3 ? blue.primary : "transparent",
                         color: isTop3 ? "#fff" : blue.primary,
-                        fontWeight: "bold",
                         width: 25,
                         height: 25
                       }}
                     >
                       {ToPersian(student.rank)}
                     </Avatar>
-                    <span style={{ fontWeight: 600 }}>{student.name}</span>
+                    <span>{student.name}</span>
                   </div>
 
                   <div style={{ color: grey[1] }}>
@@ -314,7 +312,7 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
             <span
               style={{
                 fontSize: 15,
-                fontWeight: 600,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -350,14 +348,13 @@ export const SecondCards: React.FC<{ loading?: boolean }> = ({
                       style={{
                         backgroundColor: isTop3 ? blue.primary : "transparent",
                         color: isTop3 ? "#fff" : blue.primary,
-                        fontWeight: "bold",
                         width: 25,
                         height: 25
                       }}
                     >
                       {ToPersian(student.rank)}
                     </Avatar>
-                    <span style={{ fontWeight: 600 }}>{student.name}</span>
+                    <span>{student.name}</span>
                   </div>
 
                   <div style={{ color: grey[1] }}>
