@@ -84,7 +84,9 @@ export const Dashboard = () => {
         <Col xs={24} md={12}>
           <Card
             title={
-              <span className="font-normal">
+              <span
+                className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
+              >
                 تعداد حضور و غیاب انجام‌شده در ۷ روز گذشته
               </span>
             }
@@ -114,7 +116,7 @@ export const Dashboard = () => {
         </Col>
       </Row>
 
-      <FirstCards loading={isLoadingData} />
+      <FirstCards loading={isLoadingData} isMobile={isMobile} />
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24}>
@@ -123,15 +125,21 @@ export const Dashboard = () => {
               <div
                 className={`flex justify-between items-center ${isMobile ? "gap-10" : "gap-0"}`}
               >
-                <Tooltip title="میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری">
+                <Tooltip
+                  title={
+                    <span className="text-xs">
+                      میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری
+                    </span>
+                  }
+                  placement="topLeft"
+                >
                   <span
-                    className="inline-block max-w-full font-normal"
+                    className={`font-normal inline-block max-w-full ${isMobile ? "text-[15px]" : "text-base"}`}
                     style={{
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
                       color: gray[5],
-                      fontSize: 15,
                       transition: "all 0.2s"
                     }}
                     onMouseEnter={(e) => {
@@ -151,7 +159,12 @@ export const Dashboard = () => {
                     onChange={setSelected}
                     showSearch
                     placeholder={
-                      <span style={{ color: "black" }}>دانشکده اصلی</span>
+                      <span
+                        className={`${isMobile ? "text-[15px]" : "text-base"}`}
+                        style={{ color: "black" }}
+                      >
+                        دانشکده اصلی
+                      </span>
                     }
                     style={{ width: isMobile ? "50%" : "30%" }}
                     options={sectionOptions}
@@ -180,9 +193,22 @@ export const Dashboard = () => {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="font-normal">
-                درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
-              </span>
+              <Tooltip
+                title={
+                  <span className="text-xs">
+                    درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
+                  </span>
+                }
+                placement="top"
+              >
+                <span
+                  className={`font-normal ${
+                    isMobile ? "text-[15px]" : "text-base"
+                  }`}
+                >
+                  درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
+                </span>
+              </Tooltip>
             }
           >
             <div style={{ minHeight: 280, width: "100%" }}>
@@ -200,9 +226,22 @@ export const Dashboard = () => {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="font-normal">
-                درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
-              </span>
+              <Tooltip
+                title={
+                  <span className="text-xs">
+                    درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
+                  </span>
+                }
+                placement="top"
+              >
+                <span
+                  className={`font-normal ${
+                    isMobile ? "text-[15px]" : "text-base"
+                  }`}
+                >
+                  درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
+                </span>
+              </Tooltip>
             }
           >
             <div style={{ minHeight: 280, width: "100%" }}>

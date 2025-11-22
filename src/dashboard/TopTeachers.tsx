@@ -45,16 +45,6 @@ const TopTeachersSkeleton = () => (
             }}
           />
         </div>
-
-        <Skeleton.Input
-          active
-          size="small"
-          style={{
-            width: 50,
-            height: 16,
-            borderRadius: 6
-          }}
-        />
       </div>
     ))}
   </div>
