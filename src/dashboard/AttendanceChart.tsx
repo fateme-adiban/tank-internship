@@ -13,6 +13,7 @@ import {
 } from "recharts"
 import { blue } from "@ant-design/colors"
 import { Skeleton } from "antd"
+import { AttendanceItem } from "../hooks/useChartData"
 
 export const AttendanceChartSkeleton = () => (
   <div
@@ -60,7 +61,7 @@ export const AttendanceChartSkeleton = () => (
   </div>
 )
 
-export const AttendanceChart = () => {
+export const AttendanceChart = ({ data }: { data: AttendanceItem[] }) => {
   return (
     <div
       style={{

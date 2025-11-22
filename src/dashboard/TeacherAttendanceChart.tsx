@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
+import { TeacherAttendanceItem } from "../hooks/useChartData"
 
 const CustomTooltip = ({
   active,
@@ -95,7 +96,11 @@ export const TeacherAttendanceChartSkeleton = () => (
   </div>
 )
 
-export const TeacherAttendanceChart = () => (
+export const TeacherAttendanceChart = ({
+  data
+}: {
+  data: TeacherAttendanceItem[]
+}) => (
   <div
     style={{
       width: "100%",

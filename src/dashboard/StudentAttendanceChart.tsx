@@ -15,6 +15,7 @@ import {
   Legend
 } from "recharts"
 import { Skeleton } from "antd"
+import { StudentAttendanceItem } from "../hooks/useChartData"
 
 interface ChartDataPoint {
   date: string
@@ -174,7 +175,11 @@ export const StudentAttendanceChartSkeleton = () => (
   </div>
 )
 
-export const StudentAttendanceChart = ({}) => {
+export const StudentAttendanceChart = ({
+  data
+}: {
+  data: StudentAttendanceItem[]
+}) => {
   const isMobile = useMediaQuery({ maxWidth: 768 })
 
   return (

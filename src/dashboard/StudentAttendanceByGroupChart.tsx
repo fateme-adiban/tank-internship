@@ -11,6 +11,7 @@ import {
   ResponsiveContainer
 } from "recharts"
 import { blue, gray } from "@ant-design/colors"
+import { StudentByGroupItem } from "../hooks/useChartData"
 
 const CustomTooltip = ({
   active,
@@ -95,7 +96,11 @@ export const StudentAttendanceByGroupChartSkeleton = () => (
   </div>
 )
 
-export const StudentAttendanceByGroupChart = () => {
+export const StudentAttendanceByGroupChart = ({
+  data
+}: {
+  data: StudentByGroupItem[]
+}) => {
   return (
     <div
       style={{
