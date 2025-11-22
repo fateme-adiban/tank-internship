@@ -1,7 +1,6 @@
 import "./globals.css"
 import { ConfigProvider } from "antd"
 import localFont from "next/font/google"
-import { timezTheme } from "@/styles/theme"
 import { HydrationFix } from "@/components/HydrationFix"
 import type { Metadata } from "next"
 import { Vazirmatn } from "next/font/google"

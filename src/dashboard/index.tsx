@@ -4,26 +4,27 @@ import dynamic from "next/dynamic"
 import { Row, Col, Card, ConfigProvider, Select, Tooltip } from "antd"
 import { gray } from "@ant-design/colors"
 import { sectionOptions } from "../utils/data"
-
+import { useChartData } from "@/hooks/useChartData"
 import { Tabs } from "./Tabs"
 import { TopTeachers } from "./TopTeachers"
 import { FirstCards } from "./FirstCards"
 import { SecondCards } from "./SecondCards"
+
+// Skeleton
 
 import { AttendanceChartSkeleton } from "./AttendanceChart"
 import { TeacherAttendanceChartSkeleton } from "./TeacherAttendanceChart"
 import { StudentAttendanceChartSkeleton } from "./StudentAttendanceChart"
 import { StudentAttendanceByGroupChartSkeleton } from "./StudentAttendanceByGroupChart"
 
+// Lazy Loading
+
 const AttendanceChart = dynamic(
   () =>
     import("./AttendanceChart").then((module) => ({
       default: module.AttendanceChart
     })),
-  {
-    ssr: false,
-    loading: () => <AttendanceChartSkeleton />
-  }
+  { ssr: false, loading: () => <AttendanceChartSkeleton /> }
 )
 
 const TeacherAttendanceChart = dynamic(
@@ -31,10 +32,7 @@ const TeacherAttendanceChart = dynamic(
     import("./TeacherAttendanceChart").then((module) => ({
       default: module.TeacherAttendanceChart
     })),
-  {
-    ssr: false,
-    loading: () => <TeacherAttendanceChartSkeleton />
-  }
+  { ssr: false, loading: () => <TeacherAttendanceChartSkeleton /> }
 )
 
 const StudentAttendanceChart = dynamic(
@@ -42,10 +40,7 @@ const StudentAttendanceChart = dynamic(
     import("./StudentAttendanceChart").then((module) => ({
       default: module.StudentAttendanceChart
     })),
-  {
-    ssr: false,
-    loading: () => <StudentAttendanceChartSkeleton />
-  }
+  { ssr: false, loading: () => <StudentAttendanceChartSkeleton /> }
 )
 
 const StudentAttendanceByGroupChart = dynamic(
@@ -53,48 +48,49 @@ const StudentAttendanceByGroupChart = dynamic(
     import("./StudentAttendanceByGroupChart").then((module) => ({
       default: module.StudentAttendanceByGroupChart
     })),
-  {
-    ssr: false,
-    loading: () => <StudentAttendanceByGroupChartSkeleton />
-  }
+  { ssr: false, loading: () => <StudentAttendanceByGroupChartSkeleton /> }
 )
 
 export const Dashboard = () => {
   const [isMobile, setIsMobile] = useState(false)
   const [selected, setSelected] = useState("main")
-  const [isLoadingData, setIsLoadingData] = useState(true)
+
+  const {
+    attendance,
+    teacherAttendance,
+    studentAttendance,
+    studentByGroup,
+    loading
+  } = useChartData()
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 1024)
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
-    return () => window.removeEventListener("resize", checkMobile)
-  }, [])
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoadingData(false), 1000)
-    return () => clearTimeout(timer)
+    const check = () => setIsMobile(window.innerWidth <= 1024)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
   }, [])
 
   return (
     <div>
-      <Tabs loading={isLoadingData} />
+      <Tabs loading={loading} />
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} md={12}>
           <Card
             title={
-              <span className="font-normal">
+              <span
+                className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
+              >
                 تعداد حضور و غیاب انجام‌شده در ۷ روز گذشته
               </span>
             }
           >
             <div style={{ minHeight: 280, width: "100%" }}>
-              {isLoadingData ? (
+              {loading ? (
                 <AttendanceChartSkeleton />
               ) : (
                 <Suspense fallback={<AttendanceChartSkeleton />}>
-                  <AttendanceChart />
+                  <AttendanceChart data={attendance} />
                 </Suspense>
               )}
             </div>
@@ -109,12 +105,12 @@ export const Dashboard = () => {
               </span>
             }
           >
-            <TopTeachers loading={isLoadingData} />
+            <TopTeachers loading={loading} />
           </Card>
         </Col>
       </Row>
 
-      <FirstCards loading={isLoadingData} />
+      <FirstCards loading={loading} isMobile={isMobile} />
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24}>
@@ -123,36 +119,30 @@ export const Dashboard = () => {
               <div
                 className={`flex justify-between items-center ${isMobile ? "gap-10" : "gap-0"}`}
               >
-                <Tooltip title="میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری">
+                <Tooltip
+                  title={
+                    <span className="text-xs">
+                      میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری
+                    </span>
+                  }
+                  placement="topLeft"
+                >
                   <span
-                    className="inline-block max-w-full font-normal"
+                    className={`font-normal inline-block max-w-full ${isMobile ? "text-[15px]" : "text-base"}`}
                     style={{
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       whiteSpace: "nowrap",
-                      color: gray[5],
-                      fontSize: 15,
-                      transition: "all 0.2s"
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#1677ff"
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = gray[5]
+                      color: gray[5]
                     }}
                   >
                     میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری
                   </span>
                 </Tooltip>
-
                 <ConfigProvider direction="rtl">
                   <Select
                     value={selected}
                     onChange={setSelected}
-                    showSearch
-                    placeholder={
-                      <span style={{ color: "black" }}>دانشکده اصلی</span>
-                    }
                     style={{ width: isMobile ? "50%" : "30%" }}
                     options={sectionOptions}
                     defaultValue="main"
@@ -162,11 +152,11 @@ export const Dashboard = () => {
             }
           >
             <div style={{ minHeight: 400, width: "100%" }}>
-              {isLoadingData ? (
+              {loading ? (
                 <TeacherAttendanceChartSkeleton />
               ) : (
                 <Suspense fallback={<TeacherAttendanceChartSkeleton />}>
-                  <TeacherAttendanceChart />
+                  <TeacherAttendanceChart data={teacherAttendance} />
                 </Suspense>
               )}
             </div>
@@ -174,23 +164,33 @@ export const Dashboard = () => {
         </Col>
       </Row>
 
-      <SecondCards loading={isLoadingData} />
+      <SecondCards loading={loading} />
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="font-normal">
-                درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
-              </span>
+              <Tooltip
+                title={
+                  <span className="text-xs">
+                    درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
+                  </span>
+                }
+              >
+                <span
+                  className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
+                >
+                  درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
+                </span>
+              </Tooltip>
             }
           >
             <div style={{ minHeight: 280, width: "100%" }}>
-              {isLoadingData ? (
+              {loading ? (
                 <StudentAttendanceChartSkeleton />
               ) : (
                 <Suspense fallback={<StudentAttendanceChartSkeleton />}>
-                  <StudentAttendanceChart />
+                  <StudentAttendanceChart data={studentAttendance} />
                 </Suspense>
               )}
             </div>
@@ -200,17 +200,27 @@ export const Dashboard = () => {
         <Col xs={24} lg={12}>
           <Card
             title={
-              <span className="font-normal">
-                درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
-              </span>
+              <Tooltip
+                title={
+                  <span className="text-xs">
+                    درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
+                  </span>
+                }
+              >
+                <span
+                  className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
+                >
+                  درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
+                </span>
+              </Tooltip>
             }
           >
             <div style={{ minHeight: 280, width: "100%" }}>
-              {isLoadingData ? (
+              {loading ? (
                 <StudentAttendanceByGroupChartSkeleton />
               ) : (
                 <Suspense fallback={<StudentAttendanceByGroupChartSkeleton />}>
-                  <StudentAttendanceByGroupChart />
+                  <StudentAttendanceByGroupChart data={studentByGroup} />
                 </Suspense>
               )}
             </div>

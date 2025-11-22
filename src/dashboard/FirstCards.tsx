@@ -95,9 +95,10 @@ export const FirstCardsSkeleton = () => (
   </Row>
 )
 
-export const FirstCards: React.FC<{ loading?: boolean }> = ({
-  loading = false
-}) => {
+export const FirstCards: React.FC<{
+  loading?: boolean
+  isMobile?: boolean
+}> = ({ loading = false, isMobile = false }) => {
   if (loading) {
     return <FirstCardsSkeleton />
   }
@@ -117,9 +118,10 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }}
           title={
             <span
+              className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
               style={{
                 color: gray[0],
-                fontSize: 16,
+
                 fontWeight: 400,
                 letterSpacing: -0.5
               }}
@@ -162,9 +164,9 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }}
           title={
             <span
+              className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
               style={{
                 color: gray[0],
-                fontSize: 16,
                 fontWeight: 400,
                 letterSpacing: -0.5
               }}
@@ -247,9 +249,9 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }}
           title={
             <span
+              className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
               style={{
                 color: gray[0],
-                fontSize: 16,
                 fontWeight: 400,
                 letterSpacing: -0.5
               }}
@@ -283,9 +285,9 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }}
           title={
             <span
+              className={`font-normal ${isMobile ? "text-[15px]" : "text-base"}`}
               style={{
                 color: gray[0],
-                fontSize: 16,
                 fontWeight: 400,
                 letterSpacing: -0.5
               }}
