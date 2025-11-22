@@ -1,11 +1,11 @@
 export const StudentAttendanceChartData = [
-  { date: "2025-10-26", day: "شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-27", day: "یک‌شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-28", day: "دو‌شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-29", day: "‌سه‌شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-30", day: "چهار‌شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-1", day: "پنج‌شنبه", before_12: 0, after_12: 0 },
-  { date: "2025-10-2", day: "جمعه", before_12: 0, after_12: 0 }
+  { date: "2025-10-26", day: "شنبه", before_12: 20, after_12: 50 },
+  { date: "2025-10-27", day: "یک‌شنبه", before_12: 40, after_12: 50 },
+  { date: "2025-10-28", day: "دو‌شنبه", before_12: 20, after_12: 40 },
+  { date: "2025-10-29", day: "‌سه‌شنبه", before_12: 50, after_12: 30 },
+  { date: "2025-10-30", day: "چهار‌شنبه", before_12: 30, after_12: 40 },
+  { date: "2025-10-1", day: "پنج‌شنبه", before_12: 40, after_12: 30 },
+  { date: "2025-10-2", day: "جمعه", before_12: 10, after_12: 40 }
 ]
 
 export const DataCardChart = [
@@ -45,22 +45,22 @@ export const DataCardChart = [
 
 export const DataBarChart = [
   { day: "شنبه", value: 1 },
-  { day: "یک‌شنبه", value: 0 },
+  { day: "یک‌شنبه", value: 0.5 },
   { day: "دوشنبه", value: 1 },
-  { day: "سه‌شنبه", value: 0 },
-  { day: "چهارشنبه", value: 0 },
+  { day: "سه‌شنبه", value: 0.8 },
+  { day: "چهارشنبه", value: 0.7 },
   { day: "پنج‌شنبه", value: 1 },
-  { day: "جمعه", value: 0 }
+  { day: "جمعه", value: 0.9 }
 ]
 
 export const TeacherAttendanceChartData = [
-  { teacher: "مهدی باختری", value: 0 },
-  { teacher: "مهدی پناهی", value: 0 },
-  { teacher: "ملیکا واعظ", value: 0 },
-  { teacher: "علی لطفی", value: 0 },
-  { teacher: "فاطمه ادیبان", value: 0 },
+  { teacher: "مهدی باختری", value: 100 },
+  { teacher: "مهدی پناهی", value: 60 },
+  { teacher: "ملیکا واعظ", value: 100 },
+  { teacher: "علی لطفی", value: 70 },
+  { teacher: "فاطمه ادیبان", value: 80 },
   { teacher: "زینب شیدایی", value: 100 },
-  { teacher: "هانیه انصاری", value: 0 }
+  { teacher: "هانیه انصاری", value: 60 }
 ]
 
 export const Teachers = [
@@ -113,11 +113,11 @@ export const sectionOptions = [
 ]
 
 export const StudentAttendanceByGroupChartData = [
-  { name: "مهندسی‌کامپیوتر", value: 0 },
-  { name: "صنایع", value: 0 },
-  { name: "برق", value: 0 },
-  { name: "مهندسی‌پزشکی", value: 0 },
-  { name: "عمران", value: 0 },
-  { name: "نرم‌افزار", value: 0 },
-  { name: "روان‌پزشکی", value: 0 }
+  { name: "مهندسی‌کامپیوتر", value: 50 },
+  { name: "صنایع", value: 60 },
+  { name: "برق", value: 80 },
+  { name: "مهندسی‌پزشکی", value: 90 },
+  { name: "عمران", value: 100 },
+  { name: "نرم‌افزار", value: 85 },
+  { name: "روان‌پزشکی", value: 70 }
 ]

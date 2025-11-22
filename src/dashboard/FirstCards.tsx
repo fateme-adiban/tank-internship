@@ -120,7 +120,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
               style={{
                 color: gray[0],
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -129,7 +129,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }
         >
           <div className="flex items-center gap-2">
-            <span className="font-bold text-[25px]">٪۰.۰</span>
+            <span className="font-semibold text-[25px]">٪۷۰</span>
             <span style={{ color: gray[4], fontSize: 16 }}>
               از ۳۵ کلاس برگزار می‌شود
             </span>
@@ -137,7 +137,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
 
           <Progress
             style={{ paddingTop: 20 }}
-            percent={0}
+            percent={70}
             size="small"
             showInfo={false}
           />
@@ -165,7 +165,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
               style={{
                 color: gray[0],
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -174,7 +174,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }
         >
           <div className="flex items-center gap-2">
-            <span className="font-bold text-[25px]"> ۱۷۲ </span>
+            <span className="font-semibold text-[25px]"> ۱۷۲ </span>
             <span style={{ color: gray[4], fontSize: 16 }}>کل درس‌ها </span>
           </div>
 
@@ -250,7 +250,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
               style={{
                 color: gray[0],
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >
@@ -259,7 +259,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
           }
         >
           <div className="flex items-center gap-2">
-            <span className="font-bold text-[25px]">۰</span>
+            <span className="font-semibold text-[25px]">۰</span>
             <span style={{ color: gray[4], fontSize: 15 }}>دانش‌آموز غایب</span>
           </div>
 
@@ -286,7 +286,7 @@ export const FirstCards: React.FC<{ loading?: boolean }> = ({
               style={{
                 color: gray[0],
                 fontSize: 16,
-                fontWeight: 500,
+                fontWeight: 400,
                 letterSpacing: -0.5
               }}
             >

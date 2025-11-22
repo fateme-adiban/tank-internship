@@ -38,7 +38,6 @@ const CustomLegend = ({ payload }: { payload?: CustomLegendPayload[] }) => {
         textAlign: "center",
         marginBottom: -40,
         fontSize: 15,
-        fontWeight: 500,
         display: "flex",
         justifyContent: "center",
         gap: 20
@@ -109,7 +108,7 @@ const CustomTooltip = ({
         style={{
           fontSize: 15,
           marginBottom: 4,
-          fontWeight: 500
+          fontWeight: 400
         }}
       >
         {point.day} {ToPersianDate(point.date)}
@@ -130,7 +129,7 @@ const CustomTooltip = ({
             backgroundColor: orange.primary
           }}
         />
-        ٪{ToPersian(before_12 / 100)} از کلاس
+        ٪{ToPersian(before_12)} از کلاس
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
         <span
@@ -141,7 +140,7 @@ const CustomTooltip = ({
             backgroundColor: blue.primary
           }}
         />
-        ٪{ToPersian(after_12 / 100)} از کلاس
+        ٪{ToPersian(after_12)} از کلاس
       </div>
     </div>
   )
@@ -198,7 +197,7 @@ export const StudentAttendanceChart = ({}) => {
             <CartesianGrid vertical={false} strokeOpacity={0.4} />
             <XAxis
               dataKey="day"
-              tick={{ fontSize: 13, fontWeight: 600 }}
+              tick={{ fontSize: 13 }}
               interval={isMobile ? 1 : 0}
               dy={10}
               axisLine={false}
@@ -206,7 +205,7 @@ export const StudentAttendanceChart = ({}) => {
             />
             <YAxis
               orientation="right"
-              tick={{ fontSize: 14, fontWeight: 600 }}
+              tick={{ fontSize: 14 }}
               dx={20}
               tickFormatter={(value: number) => ToPersian(value)}
               axisLine={false}

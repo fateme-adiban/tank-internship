@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, Suspense } from "react"
 import dynamic from "next/dynamic"
-import { Row, Col, Card, ConfigProvider, Select } from "antd"
+import { Row, Col, Card, ConfigProvider, Select, Tooltip } from "antd"
 import { gray } from "@ant-design/colors"
 import { sectionOptions } from "../utils/data"
 
@@ -82,7 +82,13 @@ export const Dashboard = () => {
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} md={12}>
-          <Card title="تعداد حضور و غیاب انجام‌شده در ۷ روز گذشته">
+          <Card
+            title={
+              <span className="font-normal">
+                تعداد حضور و غیاب انجام‌شده در ۷ روز گذشته
+              </span>
+            }
+          >
             <div style={{ minHeight: 280, width: "100%" }}>
               {isLoadingData ? (
                 <AttendanceChartSkeleton />
@@ -96,7 +102,13 @@ export const Dashboard = () => {
         </Col>
 
         <Col xs={24} md={12}>
-          <Card title="برترین اساتید در حضور و غیاب ماه جاری">
+          <Card
+            title={
+              <span className="font-normal">
+                برترین اساتید در حضور و غیاب ماه جاری
+              </span>
+            }
+          >
             <TopTeachers loading={isLoadingData} />
           </Card>
         </Col>
@@ -108,27 +120,38 @@ export const Dashboard = () => {
         <Col xs={24}>
           <Card
             title={
-              <div className="flex justify-between items-center">
-                <span
-                  style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    color: gray[5],
-                    fontSize: 15
-                  }}
-                >
-                  میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری
-                </span>
+              <div
+                className={`flex justify-between items-center ${isMobile ? "gap-10" : "gap-0"}`}
+              >
+                <Tooltip title="میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری">
+                  <span
+                    className="inline-block max-w-full font-normal"
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      color: gray[5],
+                      fontSize: 15,
+                      transition: "all 0.2s"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#1677ff"
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = gray[5]
+                    }}
+                  >
+                    میزان حضور غیاب معلم به تفکیک شعبه در ماه جاری
+                  </span>
+                </Tooltip>
+
                 <ConfigProvider direction="rtl">
                   <Select
                     value={selected}
                     onChange={setSelected}
                     showSearch
                     placeholder={
-                      <span style={{ color: "black", fontWeight: 700 }}>
-                        دانشکده اصلی
-                      </span>
+                      <span style={{ color: "black" }}>دانشکده اصلی</span>
                     }
                     style={{ width: isMobile ? "50%" : "30%" }}
                     options={sectionOptions}
@@ -155,7 +178,13 @@ export const Dashboard = () => {
 
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={12}>
-          <Card title="درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر">
+          <Card
+            title={
+              <span className="font-normal">
+                درصد حضور و غیاب دانش‌آموز در کلاسهای صبح و بعدازظهر
+              </span>
+            }
+          >
             <div style={{ minHeight: 280, width: "100%" }}>
               {isLoadingData ? (
                 <StudentAttendanceChartSkeleton />
@@ -169,7 +198,13 @@ export const Dashboard = () => {
         </Col>
 
         <Col xs={24} lg={12}>
-          <Card title="درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی">
+          <Card
+            title={
+              <span className="font-normal">
+                درصد حضور و غیاب دانش‌آموز به تفکیک گروه آموزشی
+              </span>
+            }
+          >
             <div style={{ minHeight: 280, width: "100%" }}>
               {isLoadingData ? (
                 <StudentAttendanceByGroupChartSkeleton />

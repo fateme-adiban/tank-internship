@@ -36,7 +36,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
 
   if (isMobile) {
     return (
-      <Layout style={{ minHeight: "100vh", direction: "rtl" }}>
+      <Layout style={{ minHeight: "100vh", direction: "rtl", display: "flex" }}>
         <HeaderSection loading={isLoadingData}>
           <div className="flex justify-between items-center mb-1">
             <div className="flex gap-3 items-center">
@@ -159,7 +159,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           open={drawerOpen}
           onClose={closeDrawer}
           width="100%"
-          styles={{ body: { padding: 0 } }}
+          styles={{ body: { padding: 0, margin: 0 } }}
           closable={true}
           title={
             <div
@@ -188,7 +188,7 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return (
-    <Layout style={{ minHeight: "100vh", direction: "rtl" }}>
+    <Layout style={{ minHeight: "100vh", direction: "rtl", display: "flex" }}>
       <Sider
         width={260}
         collapsedWidth={70}
@@ -221,23 +221,26 @@ export const AdminLayout: React.FC<{ children: React.ReactNode }> = ({
           {!collapsed && (
             <span
               className="text-2xl transition-opacity duration-300"
-              style={{ color: blue.primary }}
+              style={{ color: blue.primary, fontWeight: 600 }}
             >
               تایمز
             </span>
           )}
         </div>
 
-        <SidebarMenu loading={isLoadingData} />
+        <SidebarMenu loading={isLoadingData} collapsed={collapsed} />
       </Sider>
 
       <Layout
         style={{
           marginRight: collapsed ? 70 : 260,
-          transition: "margin-right 0.2s ease"
+          transition: "margin-right 0.2s ease",
+          minWidth: 0,
+          display: "flex"
         }}
       >
         <HeaderSection loading={isLoadingData} />
+
         <ContentSection>{children}</ContentSection>
       </Layout>
     </Layout>

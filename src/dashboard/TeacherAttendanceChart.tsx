@@ -11,7 +11,6 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts"
-import { Skeleton } from "antd"
 
 const CustomTooltip = ({
   active,
@@ -113,17 +112,19 @@ export const TeacherAttendanceChart = () => (
         <CartesianGrid vertical={false} strokeOpacity={0.4} />
         <XAxis
           dataKey="teacher"
-          tick={{ fontSize: 12, fontWeight: 500 }}
+          tick={{ fontSize: 12 }}
           interval={0}
           angle={-90}
           dx={-5}
-          dy={35}
+          textAnchor="start"
+          dy={5}
           axisLine={false}
           tickLine={false}
         />
         <YAxis
           orientation="right"
-          tick={{ fontSize: 14, fontWeight: 600 }}
+          tick={{ fontSize: 14 }}
+          dy={-3}
           dx={25}
           ticks={[0, 25, 50, 75, 100]}
           tickFormatter={(value) => `${ToPersian(value)}٪`}

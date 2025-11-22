@@ -108,7 +108,7 @@ export const TopTeachers: React.FC<{ loading?: boolean }> = ({
               >
                 {ToPersian(teacher.rank)}
               </Avatar>
-              <span style={{ fontWeight: 600 }}>{teacher.name}</span>
+              <span>{teacher.name}</span>
             </div>
 
             <div style={{ color: grey[1] }}>
